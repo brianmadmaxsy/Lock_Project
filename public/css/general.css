@@ -1,0 +1,195 @@
+/*To all Screen*/
+
+body{ background:#FAFAFA;  }
+#container{ height:auto; margin:0px auto 0px auto; }
+
+/*Header design*/
+#header{ position:relative; background-color:#F2F2F2; }
+#header > #header_user img{ border:1px solid #BDBDBD; }
+#header > #header_user > .header_user_div > .username{font-family:serif; color:#8258FA; color:#086A87; }
+#header > #header_user > .header_user_div > .header_menu a
+{ color:#2E9AFE; text-decoration: none; font-family: arial;}
+/*end of Header design*/
+
+
+
+#content > #accordion h1{
+	background:#E6E6E6;
+	/* background:#428bca; */
+	color:#0174DF;
+}
+#content > #accordion h1:hover{
+	color:#2E9AFE;
+	color:white;
+	background:#428bca;
+}
+
+#content > #accordion > .section h2
+{
+	color:black;
+}
+
+
+#footer{ background:#086A87; }
+
+#footer > .label_div{ height:auto; width:200px; margin:0px auto 0px auto; }
+
+#footer label{color:white;}
+
+/*Menu*/
+.nav{ background: #086A87; }
+#menu { background: none;}
+
+
+/*Profile*/
+
+#profile_info table tr td{
+	font-family: Arial;
+}
+
+
+
+#profile_accordion h1{
+	background:#E6E6E6;
+	/* background:#428bca; */
+	color:#0174DF;
+}
+#profile_accordion h1:hover{
+	color:#2E9AFE;
+	color:white;
+	background:#428bca;
+}
+
+
+
+#education_content > .school_name a
+{
+	color:#084B8A;
+	text-decoration: none;
+}
+#education_content > .school_name a:hover
+{	
+	text-decoration: underline;
+}
+.school_attended{
+	font-size: 15px;
+	font-family: arial;
+}
+
+#work_content > .work_name a
+{
+	color:#084B8A;
+	text-decoration: none;
+}
+#work_content > .work_name a:hover
+{	
+	text-decoration: underline;
+}
+.work_attended{
+	font-size: 15px;
+	font-family: arial;
+}
+
+
+.option_child_acct_div{
+	height:25px;
+	width:auto;
+	
+	margin:0px auto 0px auto;
+}
+.option_child_acct_div > .add_icon_div{
+	height:20px;
+	width:20px;
+	float:right;
+	
+}
+.option_child_acct_div > .add_icon_div img{
+	height:20px;
+	width:20px;
+}
+
+#edit_icon_div{
+	position:absolute;
+	height:20px;
+	width:20px;
+	margin:20px 0px 0px 350px;
+	
+}
+#edit_icon_div img{
+	height:100%;
+	width:100%;
+}
+/*Edit Dialog box*/
+#edit_profile_dialog{
+	background:#FAFAFA;
+}
+.ui-dialog > .ui-widget-header /*Dialog box title bar*/
+{
+	color:white;
+	background: #086A87;
+}
+.edit_buttons 
+{
+
+	text-align: center;
+}
+.edit_buttons input[type='submit']
+{
+	background:#E6E6E6;
+	border:1px solid gray;
+	border-radius:10px;
+}
+/*End of Edit Dialog Box*/
+#child_edit_icon_div{
+	position:absolute;
+	height:20px;
+	width:20px;
+	margin:20px 0px 0px 350px;
+	
+}
+#child_edit_icon_div img{
+	height:100%;
+	width:100%;
+}
+#child_delete_icon_div{
+	
+	position:absolute;
+	height:20px;
+	width:20px;
+	margin:20px 0px 0px 370px;
+	
+}
+#child_delete_icon_div img{
+	height:100%;
+	width:100%;
+}
+
+/*End of profile design*/
+
+/*Child account*/
+#child_profile_info table tr td{
+	font-family: Arial;
+}
+#child_profile_info table tr td h3{
+	color:#086A87;
+}
+.function label{
+	color:#086A87;
+}
+.function input[type="submit"]
+{
+	color:#086A87;
+}
+#dashboard_tab ul li a{
+	color:#086A87;
+	
+}
+#dashboard_tab ul li :hover{
+	color:#2E9AFE;
+	color:white;
+	background:#428bca;
+}
+.site_div{
+	margin:5px 0px 0px 5px;
+}
+/*End of child*/

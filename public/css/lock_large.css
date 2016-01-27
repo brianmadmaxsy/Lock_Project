@@ -1,0 +1,435 @@
+/* 901px-1366*/
+
+body{
+	margin: 0;
+	padding:0;
+	
+}
+/*Start of header designs*/
+
+#header{
+	height:100px;
+}
+#header > a > img{
+	position:absolute;
+	float: left;
+	margin:10px 0px 0px 10%;
+	height:80px;
+	width:203px;	
+}
+
+#header > #header_user{
+	height:auto;
+	width:auto;
+	padding:0px;
+	float:right;
+	margin:28px 7% 0px 0px;
+	
+}
+.header_user_div{
+	height:auto;
+	width:auto;
+	margin:0px 0px 0px 60px;
+}
+#header > #header_user img{
+	height:50px;
+	width:50px;
+	border:1px solid gray;
+	float:left;
+}
+#header > #header_user > .header_user_div > .username{
+	height:25px;
+	width: auto;
+	text-align: center;
+	
+	margin:3px auto 0px auto;
+	font-size: 20px;
+}
+
+#header > #header_user > .header_user_div > .header_menu{ 
+	height:25px; width:120px; margin:0px auto 0px auto; }
+/*End of Header Designs*/
+
+/*Start of Banner designs*/
+#banner{ height:auto; width:auto; }
+
+#banner img{ height:auto; width:100%; }
+
+.partner{
+	height:auto;
+	width:100%;
+	
+	padding-bottom: 5px;
+}
+.partner > .partner_img_div{
+	height:auto;
+	width:485px;
+	
+	margin:10px auto 0px auto;
+}
+.partner img{
+	height:120px;
+	width:485px;	
+}
+/*End of Banner*/
+
+
+/*Content designs*/
+#content{
+	height:auto;
+	width:100%;
+	
+}
+
+#accordion{
+    margin:10px auto 10px auto;
+    width:100%;
+    height:auto;
+
+}
+
+#accordion > .section
+{
+	height:200px;
+	width:auto;
+	overflow: scroll;
+	
+}
+
+/*Content Designs*/
+
+/*Footer Design*/
+#footer{
+	width:100%;
+	height:20px;
+
+}
+/*End of footer design*/
+/*Menu*/
+.nav{
+	width:100%;
+	height:auto;
+}
+#menu {
+	width: 680px;
+	margin:0px auto 0px auto;
+}
+#menu ul {
+	list-style: none;
+	margin:0px;
+	padding: 0;
+	line-height: 1;
+	display: block;
+	zoom: 1;
+}
+#menu ul:after {
+	content: " ";
+	display: block;
+	font-size: 0;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+#menu ul li { display: inline-block; padding: 0; }
+#menu.align-right ul li { float: right; }
+#menu.align-center ul { text-align: center; }
+#menu ul li a {
+	color: #ffffff;
+	text-decoration: none;
+	display: block;
+	padding: 15px 25px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 14px;
+	position: relative;
+
+	-webkit-transition: color .25s;
+	-moz-transition: color .25s;
+	-ms-transition: color .25s;
+	-o-transition: color .25s;
+	transition: color .25s;
+}
+#menu ul li a:hover { color: #333333; color: white; }
+#menu ul li a:hover:before { width: 100%; }
+#menu ul li a:after {
+	content: "";
+	display: block;
+	position: absolute;
+	right: -3px;
+	top: 19px;
+	height: 6px;
+	width: 6px;
+	background: #ffffff;
+	opacity: .5;
+}
+#menu ul li a:before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 3px;
+	width: 0;
+	background: #333333;
+	background:#FAFAFA;
+	-webkit-transition: width .25s;
+	-moz-transition: width .25s;
+	-ms-transition: width .25s;
+	-o-transition: width .25s;
+	transition: width .25s;
+}
+#menu ul li.last > a:after,
+#menu ul li:last-child > a:after {
+  	display: none;
+}
+#menu ul li.active a {
+  	color: #333333;
+}
+#menu ul li.active a:before {
+  	width: 100%;
+}
+#menu.align-right li.last > a:after,
+#menu.align-right li:last-child > a:after {
+  	display: block;
+}
+#menu.align-right li:first-child a:after {
+  	display: none;
+}
+
+
+/*Profile Page Design*/
+.profile_content{
+	height:270px;
+	width:800px;
+	margin:0px auto 0px auto;
+	
+}
+#pp_div{
+	
+	height:235px;
+	width:225px;
+	
+	border:1px solid #BDBDBD;
+	
+	margin:20px 0px 0px 80px;
+	float:left;
+}
+#pp_div img{
+	height:100%;
+	
+	width:100%;
+	
+    
+}
+
+#profile_info{
+	height:auto;
+	
+	width:450px;
+	margin:0px 20px 0px 0px;
+	float:right;
+	padding:0px;
+}
+
+#profile_info table{
+	
+	width:auto;
+	height:auto;
+	
+}
+
+
+#profile_accordion{
+    margin:10px auto 10px auto;
+    width:800px;
+    height:auto;
+
+}
+
+#profile_accordion > .section
+{
+	height:200px;
+	width:auto;
+	overflow: scroll;
+	
+}
+
+
+
+#profile_accordion > .section > .child_acct_div{
+	height:150px;
+
+	width:100px;
+	
+	float:left;
+	margin:0px 0px 0px 10px;
+	padding:10px;
+}
+.child_acct_div img{
+	height:110px;
+	width:100px;
+	border:1px solid #BDBDBD;
+
+}
+.child_acct_div > .child_acct_name{
+	
+	margin:0px auto 0px auto;
+	width:100%;
+	height:auto;
+	text-align: center;
+	font-family: Arial;
+}
+.child_acct_div > .child_acct_relationship{
+	
+	margin:0px auto 0px auto;
+	width:100%;
+	height:auto;
+	text-align: center;
+	font-family: Arial;
+}
+
+.education_detail /*Work and Education Detail container div*/
+{
+	height:auto;
+	width:auto;
+	border:1px solid gray;
+	border-radius: 10px;
+	margin:10px 0px 0px 0px;
+	padding:10px;
+}
+.education_detail > #education_icon
+{
+	height:60px;
+	width:60px;
+	
+	margin:0px 0px 0px 0px;
+
+}
+.education_detail > #education_icon img
+{
+	height:100%;
+	width:100%;
+}
+.education_detail > #education_content{
+	height:60px;
+	width:500px;
+	
+	margin:-60px 0px 0px 70px;
+}
+
+
+.work_detail /*Work and Education Detail container div*/
+{
+	height:auto;
+	width:auto;
+	border:1px solid gray;
+	border-radius: 10px;
+	margin:10px 0px 0px 0px;
+	padding:10px;
+}
+.work_detail > #work_icon
+{
+	height:60px;
+	width:60px;
+	
+	margin:0px 0px 0px 0px;
+
+}
+.work_detail > #work_icon img
+{
+	height:100%;
+	width:100%;
+}
+.work_detail > #work_content{
+	height:60px;
+	width:500px;
+	
+	margin:-60px 0px 0px 70px;
+}
+
+
+
+/*End of profile page desin*/
+
+/*dashboard */
+
+#dashboard_tab{
+	height:800px;
+	width:850px;
+	margin:10px auto 10px auto;
+}
+.child_profile_content{
+	height:270px;
+	width:800px;
+	margin:0px auto 0px auto;
+}
+#child_pp_div{
+	
+	height:245px;
+	width:235px;
+	
+	border:1px solid #BDBDBD;
+	margin:20px 0px 0px 60px;
+	float:left;
+}
+#child_pp_div img{
+	height:100%;
+
+	width:100%;
+}
+
+#child_profile_info{
+	height:auto;
+	
+	width:450px;
+	margin:0px 20px 0px 0px;
+	float:right;
+	padding:0px;
+}
+.field_names{
+	color:#01A9DB;
+	width: 160px;
+}
+#child_profile_info table{
+	width:auto;
+	height:auto;
+}
+
+#child_blacklist_div /*Blacklist*/
+{
+	border:1px solid #BDBDBD;
+	height:230px;
+	width:670px;
+	margin:20px auto 0px auto;
+	padding:5px;
+}
+#child_blacklist_div > .header
+{
+	height:25px;
+	width:auto;
+	margin:0px auto 0px auto;
+	
+}
+#child_blacklist_div > .header > .header_title
+{
+	color:#086A87;
+	margin:2px 0px 0px 3px;
+}
+#child_blacklist_div > .sitelist
+{
+	height:150px;
+	width:660px;
+	margin:0px auto 0px auto;
+	border:1px solid #BDBDBD;
+	margin:5px auto 0px auto;
+	overflow: scroll;
+}
+#child_blacklist_div > .function
+{
+	height:30px;
+	width:660px;
+	margin:10px auto 0px auto;
+}
+
+/*End of dashboard designs*/
