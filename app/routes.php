@@ -36,7 +36,10 @@ Route::post('/deletesite', 'LockMainController@delete_blocklist'); //delete webs
 
 //LockAPIController for retrofit
 Route::post('/apilogin', 'LockAPIController@login'); //Login
+//Route::get('/apilogin', 'LockAPIController@login'); //Login
 Route::post('/samplelogin', 'LockAPIController@samplelogin'); //sample Login
 Route::post('/apisignup', 'LockAPIController@signup'); //Signup
 Route::post('/apieditprofile','LockAPIController@editprofile'); //edit profile api
 Route::post('/apieditpp','LockAPIController@editpp'); //edit profile picture api
+Route::get('/apihome','LockAPIController@view_home'); //display home
+Route::get('/apilogout','LockAPIController@logout'); //logout

@@ -16,7 +16,7 @@ class LockAPIController extends BaseController{
 			{
 				//session, get data using the inputed username and password
 				$user = UserModel::where('username','=',$username)->first();
-					
+				Session::put('sess_user_arr',$user);
 				$response['status']="success";
 		    	$response['message']="Account found";
 		    	$response['userid']=$user['userid'];
@@ -232,7 +232,7 @@ class LockAPIController extends BaseController{
 
 	public function editprofile()
 	{
-		$userid=Input::get('userid');
+		
 		$occupation=Input::get('edit_occupation');
 		$gender=Input::get('edit_gender');
 		$bday=Input::get('edit_birthday');
@@ -241,15 +241,18 @@ class LockAPIController extends BaseController{
 		$city=Input::get('edit_city');
 		$home=Input::get('edit_home');
 
-		
+		$user=Session::get('sess_api_user_arr');
+		$userid=$user['userid'];
+
 		$user=UserModel::where('userid',$userid);
 		$user->update(['email'=>$email,'contact'=>$contact,'occupation'=>$occupation,'gender'=>$gender,'birthday'=>$bday,'city'=>$city,'home'=>$home]);
 
-		
+		Session::forget('sess_api_user_arr'); //Trash the old session
 		
 		//Getting the newly updated UserModel row and save it to a new session
 		$user = UserModel::where('userid','=',$userid)->first(); //Get updated row in database after upload picture
-		//Session::put('sess_user_arr',$user); //Save session similar to the session name of before's session.
+		Session::put('sess_api_user_arr',$user); //Save session similar to the session name of before's session.
+		
 		$response['status']="success";
 		$response['message']="Account profile updated!";
 		$response['userid']=$user['userid'];
@@ -275,10 +278,10 @@ class LockAPIController extends BaseController{
 			if(Input::hasFile('file')) //If this is a file uploaded
 			{
 				//upload profile picture and set filename to a variale to save to db
-				//$user=Session::get('sess_user_arr');
+				$user=Session::get('sess_api_user_arr');
 
-				//$get_userid=$user['userid'];
-				$get_userid=Input::get('userid');
+				$get_userid=$user['userid'];
+				
 				$file=Input::file('file');
 				$filename=bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."".$get_userid."-".$file->getClientOriginalName()."_".rand(1,100);
 				$file->move('public/profilepics',$filename);
@@ -292,11 +295,11 @@ class LockAPIController extends BaseController{
 				This part needs to trash the old session that holds the UserModel row being
 				processed during login. 
 				*/
-				//Session::forget('sess_user_arr'); //Trash the old session
+				Session::forget('sess_api_user_arr'); //Trash the old session
 
 				//Getting the newly updated UserModel row and save it to a new session
 				$user = UserModel::where('userid','=',$get_userid)->first(); //Get updated row in database after upload picture
-				//Session::put('sess_user_arr',$user); //Save session similar to the session name of before's session.
+				Session::put('sess_api_user_arr',$user); //Save session similar to the session name of before's session.
 				
 				//return Redirect::intended('http://lock-lockitproject.rhcloud.com/profile');
 
@@ -325,6 +328,54 @@ class LockAPIController extends BaseController{
 				$response['message']="Profile picture not updated!";
 				echo json_encode($response);
 			}
+	}
+
+	public function view_home() //This is the very start
+	{
+		//if (Auth::check())
+		$user=Session::get('sess_user_arr');
+		if($user!="")
+		{
+			/*
+			$children = DB::table('user')
+            ->leftJoin('child', 'user.userid', '=', 'child.userid')
+            ->where('child.parentusername','=',$user['username'])
+            ->get();
+			//return View::make('content.home')->with('user',$user)->with('children',$children);
+			*/
+			$response['status']="success";
+				$response['message']="User is still online.";
+				$response['userid']=$user['userid'];
+				$response['firstname']=$user['firstname'];
+				$response['lastname']=$user['lastname'];
+				$response['username']=$user['username'];
+				$response['password']=$user['password'];
+				$response['email']=$user['email'];
+				$response['contact']=$user['contact'];
+				$response['accttype']=$user['accttype'];
+				$response['picture']=$user['picture'];
+				$response['occupation']=$user['occupation'];
+				$response['gender']=$user['gender'];
+				$response['birthday']=$user['birthday'];
+				$response['city']=$user['city'];
+				$response['home']=$user['home'];
+
+				echo json_encode($response);
+		}
+		else{
+			//return View::make('content.entry')->with('message','Oops, you are not logged in yet!')->with('background','#F6CECE')->with('sets',$this->sets);
+			$response['status']="failed";
+			$response['message']="User not found";
+			echo json_encode($response);
+		}
+	}
+
+	public function logout()
+	{
+		Session::flush();
+		$response['status']="success";
+		$response['message']="Userlogged out";
+		echo json_encode($response);
 	}
 }
 
