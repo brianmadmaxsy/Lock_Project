@@ -33,3 +33,10 @@ Route::get('/back','http://localhost:8000/#toregister');
 
 Route::post('/addsite', 'LockMainController@add_blocklist'); //add website to blocklist
 Route::post('/deletesite', 'LockMainController@delete_blocklist'); //delete website
+
+//LockAPIController for retrofit
+Route::post('/apilogin', 'LockAPIController@login'); //Login
+Route::post('/samplelogin', 'LockAPIController@samplelogin'); //sample Login
+Route::post('/apisignup', 'LockAPIController@signup'); //Signup
+Route::post('/apieditprofile','LockAPIController@editprofile'); //edit profile api
+Route::post('/apieditpp','LockAPIController@editpp'); //edit profile picture api
