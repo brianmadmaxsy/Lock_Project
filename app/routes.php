@@ -35,7 +35,11 @@ Route::post('/addsite', 'LockMainController@add_blocklist'); //add website to bl
 Route::post('/deletesite', 'LockMainController@delete_blocklist'); //delete website
 
 //LockAPIController for retrofit
+Route::get('/userlist','LockAPIController@user_api');
+Route::get('/parentlist','LockAPIController@parent_api');
+Route::get('/childlist','LockAPIController@child_api');
 Route::post('/apilogin', 'LockAPIController@login'); //Login
+Route::get('/checklogin','LockAPIController@checklogin');
 //Route::get('/apilogin', 'LockAPIController@login'); //Login
 Route::post('/samplelogin', 'LockAPIController@samplelogin'); //sample Login
 Route::post('/apisignup', 'LockAPIController@signup'); //Signup

@@ -2,6 +2,28 @@
 
 class LockAPIController extends BaseController{
 
+	public function user_api()
+	{
+		$users = DB::table('user')->get();
+		print_r(json_encode($response['user']=$users));
+		//return json_encode($response['user']=$users);
+	}
+	public function parent_api()
+	{
+		$parent = DB::table('user')
+            ->leftJoin('parent', 'user.userid', '=', 'parent.userid')
+            ->where('user.accttype','=','Parent')
+            ->get();
+        return json_encode($response['parent']=$parent);
+	}
+	public function child_api()
+	{
+		$child = DB::table('user')
+            ->leftJoin('child', 'user.userid', '=', 'child.userid')
+            ->where('user.accttype','=','Child')
+            ->get();
+        return json_encode($response['child']=$child);
+	}
 	public function login() //login function
 	{
 		try
@@ -16,7 +38,7 @@ class LockAPIController extends BaseController{
 			{
 				//session, get data using the inputed username and password
 				$user = UserModel::where('username','=',$username)->first();
-				Session::put('sess_user_arr',$user);
+				Session::put('sess_api_user_arr',$user);
 				$response['status']="success";
 		    	$response['message']="Account found";
 		    	$response['userid']=$user['userid'];
@@ -51,6 +73,21 @@ class LockAPIController extends BaseController{
 			echo json_encode($response);
 		}
 		
+	}
+	public function checklogin()
+	{
+		$user=Session::get('sess_api_user_arr');
+		if($user!="")
+		{
+			$response['status']="success";
+		    $response['message']="Account is logged in";
+			echo json_encode($response);
+		}
+		else{
+			$response['status']="failed";
+			$response['message']="Account is not logged in";
+			echo json_encode($response);
+		}
 	}
 	//end of login function
 
@@ -333,7 +370,7 @@ class LockAPIController extends BaseController{
 	public function view_home() //This is the very start
 	{
 		//if (Auth::check())
-		$user=Session::get('sess_user_arr');
+		$user=Session::get('sess_api_user_arr');
 		if($user!="")
 		{
 			/*
