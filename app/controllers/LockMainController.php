@@ -86,84 +86,16 @@ class LockMainController extends BaseController{
 		$contact=Input::get('contact');
 		$picture="";
 		
-		$userid=bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM))."=".$username."+".$at;
+		
 
 		if($password==$cpassword)
 		{
-			
-		
-			if($at=="Parent")
+			//check if username is already in database
+			$user_check = UserModel::where('username','=',$username)->first();
+			if($user_check=="") //if username not in database
 			{
-				if(Input::hasFile('file')) //If this is a file uploaded
-				{
-					//upload profile picture and set filename to a variale to save to db
-					$file=Input::file('file');
-					$filename=bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."".$username."-".$file->getClientOriginalName();
-					$file->move('public/profilepics',$filename);
-
-					$picture=$filename;
-				}
-				else
-				{
-					//set picture to null
-					$picture="images/user.png";
-				}
-				//save as parent account
-				//$pw=Hash::make($password);
-				$pw=md5($password);
-				
-				$user=new UserModel;
-				$user->userid=$userid;
-				$user->firstname=$firstname;
-				$user->lastname=$lastname;
-				$user->username=$username;
-				$user->password=$pw;
-				$user->email=$email;
-				$user->contact=$contact;
-				$user->accttype=$at;
-				$user->picture=$picture;
-				$user->occupation='Please specify';
-				$user->gender='Please specify';
-				$user->birthday='Please specify';
-				$user->city='Please specify';
-				$user->home='Please specify';
-				$user->save();
-
-				$parentid=bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."+".$userid;
-				$membership="";
-				$membership_status="";
-
-				$parent=new ParentModel;
-				$parent->userid=$userid;
-				$parent->parentid=$parentid;
-				$parent->membership=$membership;
-				$parent->membership_status=$membership_status;
-				$parent->save();
-
-				$message="Parent Registration Successful!";
-				return View::make('content.entry')->with('message',$message)->with('background','#A9F5A9')->with('sets',$this->sets);
-			}
-			elseif($at=="Child")
-			{
-				$temp_at=""; //setting $temp_at as null in default.
-				//check if parentusername in database
-				$user = UserModel::where('username','=',$parentusername)->first();
-				$temp_at=$user['accttype'];
-
-				if($temp_at=="" OR $temp_at=="Child")
-				{
-					//return Redirect::intended('http://localhost:8000/#toregister');
-					$return_sets=array(
-					'firstname'=>$firstname,
-					'lastname'=>$lastname,
-					'username'=>$username,
-					'email'=>$email,
-					'contact'=>$contact
-					);
-					//return Redirect::to('http://localhost:8000/#toregister')->with('message', 'Parent Username not found!')->with('sets', $return_sets);
-					return Redirect::intended('http://localhost:8000/#toregister')->with('message', 'Parent Username not found!')->with('sets', $return_sets);
-				}
-				else
+				$userid=bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM))."=".$username."+".$at;
+				if($at=="Parent")
 				{
 					if(Input::hasFile('file')) //If this is a file uploaded
 					{
@@ -179,9 +111,10 @@ class LockMainController extends BaseController{
 						//set picture to null
 						$picture="images/user.png";
 					}
+					//save as parent account
+					//$pw=Hash::make($password);
 					$pw=md5($password);
-				
-					//For User Database
+					
 					$user=new UserModel;
 					$user->userid=$userid;
 					$user->firstname=$firstname;
@@ -199,35 +132,117 @@ class LockMainController extends BaseController{
 					$user->home='Please specify';
 					$user->save();
 
-					$childid=bin2hex(mcrypt_create_iv(15, MCRYPT_DEV_URANDOM))."+".$userid;
-					$computerid=bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."computer".bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."*".$username;
-					$status="";
-					
-					//For Child database
-					$child=new ChildModel;
-					$child->userid=$userid;
-					$child->childid=$childid;
-					$child->computerid=$computerid;
-					$child->parentusername=$parentusername;
-					$child->status=$status;
-					$child->save();
-					//For Computer Database
-					$os_username="";
-					$domain_name="";
-					$sid="";
+					$parentid=bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."+".$userid;
+					$membership="";
+					$membership_status="";
 
-					$computer=new ComputerModel;
-					$computer->computerid=$computerid;
-					$computer->username=$os_username;
-					$computer->domainname=$domain_name;
-					$computer->sid=$sid;
-					$computer->save();
+					$parent=new ParentModel;
+					$parent->userid=$userid;
+					$parent->parentid=$parentid;
+					$parent->membership=$membership;
+					$parent->membership_status=$membership_status;
+					$parent->save();
 
 					$message="Parent Registration Successful!";
 					return View::make('content.entry')->with('message',$message)->with('background','#A9F5A9')->with('sets',$this->sets);
-				}
+				}//end of if(parent)
+				elseif($at=="Child")
+				{
+					$temp_at=""; //setting $temp_at as null in default.
+					//check if parentusername in database
+					$user = UserModel::where('username','=',$parentusername)->first();
+					$temp_at=$user['accttype'];
+
+					if($temp_at=="" OR $temp_at=="Child")
+					{
+						//return Redirect::intended('http://localhost:8000/#toregister');
+						$return_sets=array(
+						'firstname'=>$firstname,
+						'lastname'=>$lastname,
+						'username'=>$username,
+						'email'=>$email,
+						'contact'=>$contact
+						);
+						//return Redirect::to('http://localhost:8000/#toregister')->with('message', 'Parent Username not found!')->with('sets', $return_sets);
+						return Redirect::intended('http://localhost:8000/#toregister')->with('message', 'Parent Username not found!')->with('sets', $return_sets);
+					}
+					else
+					{
+						if(Input::hasFile('file')) //If this is a file uploaded
+						{
+							//upload profile picture and set filename to a variale to save to db
+							$file=Input::file('file');
+							$filename=bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."".$username."-".$file->getClientOriginalName();
+							$file->move('public/profilepics',$filename);
+
+							$picture=$filename;
+						}
+						else
+						{
+							//set picture to null
+							$picture="images/user.png";
+						}
+						$pw=md5($password);
+					
+						//For User Database
+						$user=new UserModel;
+						$user->userid=$userid;
+						$user->firstname=$firstname;
+						$user->lastname=$lastname;
+						$user->username=$username;
+						$user->password=$pw;
+						$user->email=$email;
+						$user->contact=$contact;
+						$user->accttype=$at;
+						$user->picture=$picture;
+						$user->occupation='Please specify';
+						$user->gender='Please specify';
+						$user->birthday='Please specify';
+						$user->city='Please specify';
+						$user->home='Please specify';
+						$user->save();
+
+						$childid=bin2hex(mcrypt_create_iv(15, MCRYPT_DEV_URANDOM))."+".$userid;
+						$computerid=bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."computer".bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM))."*".$username;
+						$status="";
+						
+						//For Child database
+						$child=new ChildModel;
+						$child->userid=$userid;
+						$child->childid=$childid;
+						$child->computerid=$computerid;
+						$child->parentusername=$parentusername;
+						$child->status=$status;
+						$child->save();
+						//For Computer Database
+						$os_username="";
+						$domain_name="";
+						$sid="";
+
+						$computer=new ComputerModel;
+						$computer->computerid=$computerid;
+						$computer->username=$os_username;
+						$computer->domainname=$domain_name;
+						$computer->sid=$sid;
+						$computer->save();
+
+						$message="Parent Registration Successful!";
+						return View::make('content.entry')->with('message',$message)->with('background','#A9F5A9')->with('sets',$this->sets);
+					}
+				}//end of elseif(child)
+			} //end of if(username already in database)
+			elseif($user_check!="") //if username is already taken
+			{
+				$return_sets=array(
+					'firstname'=>$firstname,
+					'lastname'=>$lastname,
+					'username'=>$username,
+					'email'=>$email,
+					'contact'=>$contact
+				);
+				return Redirect::intended('http://localhost:8000/#toregister')->with('message', 'Username is already taken!')->with('sets', $return_sets);
 			}
-		}
+		}//end of if($password=$cpassword)
 		
 	}
 	//End of Login
